@@ -18,14 +18,27 @@ const UNIT_VALUE_DICT = {
   feet: 30.48,
 };
 
-const REGEX_LENGTH_SPECIAL =
-  /([\d\,]+)\s*(?:feet|ft|')\s*(?:and|&)*\s*([\d\.\,]+)\s*(?:inch|inches|in|")(?:[^a-z"']|$|\n)/gi;
+const REGEX_LENGTH_SPECIAL = new RegExp(
+  "" +
+    /([\d\,]+)/.source +
+    /\s*/.source +
+    `(?:${UNIT_GROUP_DICT["feet"].join("|")})` +
+    /\s*/.source +
+    /(?:and|&)*/.source +
+    /\s*/.source +
+    /([\d\.\,]+)/.source +
+    /\s*/.source +
+    `(?:${UNIT_GROUP_DICT["inches"].join("|")})` +
+    /(?=[^a-z"']|$|\n)/.source,
+  "gi"
+);
+
 const REGEX_LENGTH = new RegExp(
   "" +
     /([\d\.\,]+)/.source +
     /\s*/.source +
     `(${Object.values(UNIT_GROUP_DICT).flat().join("|")})` +
-    /(?:[^a-z"']|$|\n)/.source,
+    /(?=[^a-z"']|$|\n)/.source,
   "gi"
 );
 
