@@ -7,6 +7,10 @@
   "author": "Dizy <dev@dizy.cc>",
   "license": "MIT",
   "private": false,
+  "files": [
+    "dist",
+    "!*.js.map"
+  ],
   "scripts": {
     "build": "parcel build src/index.ts",
     "dev": "http-server -p 8080 ."
