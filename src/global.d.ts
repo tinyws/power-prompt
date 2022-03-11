@@ -4,10 +4,15 @@ interface Window {
 
 type PromptType = "length" | "temperature" | "weight" | "currency";
 
+interface PromptHintItem {
+  value: string;
+  unit: string;
+}
+
 interface Prompt {
   type: PromptType;
   source: string;
-  hint: string;
+  hint: string | PromptHintItem | PromptHintItem[];
 }
 
 type Prompter = (text: string) => Promise<Prompt[]>;

@@ -4,7 +4,7 @@ const UNIT_GROUP_DICT = {
   meters: ["meters", "meter", "m"],
   centimeters: ["centimeters", "centimeter", "cm"],
   millimeters: ["millimeters", "millimeter", "mm"],
-  yards: ["yards", "yard"],
+  yards: ["yards", "yard", "yd"],
   feet: ["feet", "ft", "'"],
 };
 
@@ -52,29 +52,52 @@ export function lengthToPrompt(
   let lengthInCM =
     (length * UNIT_VALUE_DICT[type]) / UNIT_VALUE_DICT["centimeters"];
 
-  let hint: string;
+  let hintItems: PromptHintItem[] = [];
 
   if (type === "meters" || type === "centimeters" || type === "millimeters") {
     let inches = lengthInCM / UNIT_VALUE_DICT["inches"];
     let feet = lengthInCM / UNIT_VALUE_DICT["feet"];
     let yards = lengthInCM / UNIT_VALUE_DICT["yards"];
 
-    hint = `${inches.toFixed(2)} in = ${feet.toFixed(2)} ft = ${yards.toFixed(
-      2
-    )} yards`;
+    hintItems.push({
+      value: `${inches.toFixed(2)}`,
+      unit: "in",
+    });
+
+    hintItems.push({
+      value: `${feet.toFixed(2)}`,
+      unit: "ft",
+    });
+
+    hintItems.push({
+      value: `${yards.toFixed(2)}`,
+      unit: "yd",
+    });
   } else {
     let meters = lengthInCM / UNIT_VALUE_DICT["meters"];
     let centimeters = lengthInCM / UNIT_VALUE_DICT["centimeters"];
     let millimeters = lengthInCM / UNIT_VALUE_DICT["millimeters"];
-    hint = `${meters.toFixed(2)} m = ${centimeters.toFixed(
-      2
-    )} cm = ${millimeters.toFixed(2)} mm`;
+
+    hintItems.push({
+      value: `${meters.toFixed(2)}`,
+      unit: "m",
+    });
+
+    hintItems.push({
+      value: `${centimeters.toFixed(2)}`,
+      unit: "cm",
+    });
+
+    hintItems.push({
+      value: `${millimeters.toFixed(2)}`,
+      unit: "mm",
+    });
   }
 
   return {
     type: "length",
     source: source.trim(),
-    hint,
+    hint: hintItems,
   };
 }
 
