@@ -1,6 +1,6 @@
 {
   "name": "power-prompt",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A userscript that super charges your web selection!",
   "main": "dist/index.js",
   "repository": "https://github.com/tinyws/power-prompt.git",

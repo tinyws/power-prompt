@@ -1,8 +1,3 @@
-const REGEX_LENGTH_SPECIAL =
-  /([\d\,]+)\s*(?:feet|ft|')\s*(?:and|&)*\s*([\d\.\,]+)\s*(?:inch|inches|in|")(?:[^a-z"']|$)/gi;
-const REGEX_LENGTH =
-  /([\d\.\,]+)\s*(inch|inches|in|"|miles|mile|m|meters|cm|centimeter|centimeters|mm|millimeter|millimeters|yard|yards|feet|ft|')(?:[^a-z"']|$)/gi;
-
 const UNIT_GROUP_DICT = {
   inches: ["inch", "inches", "in", '"'],
   miles: ["miles", "mile"],
@@ -22,6 +17,17 @@ const UNIT_VALUE_DICT = {
   yards: 91.44,
   feet: 30.48,
 };
+
+const REGEX_LENGTH_SPECIAL =
+  /([\d\,]+)\s*(?:feet|ft|')\s*(?:and|&)*\s*([\d\.\,]+)\s*(?:inch|inches|in|")(?:[^a-z"']|$|\n)/gi;
+const REGEX_LENGTH = new RegExp(
+  "" +
+    /([\d\.\,]+)/.source +
+    /\s*/.source +
+    `(${Object.values(UNIT_GROUP_DICT).flat().join("|")})` +
+    /(?:[^a-z"']|$|\n)/.source,
+  "gi"
+);
 
 type LengthType = keyof typeof UNIT_GROUP_DICT;
 
@@ -54,7 +60,7 @@ export function lengthToPrompt(
 
   return {
     type: "length",
-    source,
+    source: source.trim(),
     hint,
   };
 }
