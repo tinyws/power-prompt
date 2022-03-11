@@ -1,7 +1,7 @@
 const REGEX_LENGTH_SPECIAL =
-  /([\d\,]+)\s*(?:feet|ft|')\s*(?:and|&)*\s*([\d\.\,]+)\s*(?:inches|in|")/gi;
+  /([\d\,]+)\s*(?:feet|ft|')\s*(?:and|&)*\s*([\d\.\,]+)\s*(?:inch|inches|in|")(?:[^a-z"']|$)/gi;
 const REGEX_LENGTH =
-  /([\d\.\,]+)\s*(inch|inches|in|"|miles|mile|m|meters|cm|centimeter|centimeters|mm|millimeter|millimeters|yard|yards|feet|ft|')[^a-z"']/gi;
+  /([\d\.\,]+)\s*(inch|inches|in|"|miles|mile|m|meters|cm|centimeter|centimeters|mm|millimeter|millimeters|yard|yards|feet|ft|')(?:[^a-z"']|$)/gi;
 
 const UNIT_GROUP_DICT = {
   inches: ["inch", "inches", "in", '"'],
