@@ -1,0 +1,19 @@
+{
+  "name": "power-prompt",
+  "version": "1.0.0",
+  "description": "A userscript that super charges your web selection!",
+  "main": "dist/index.js",
+  "repository": "https://github.com/tinyws/power-prompt.git",
+  "author": "Dizy <dev@dizy.cc>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "parcel build src/index.ts",
+    "dev": "http-server -p 8080 ."
+  },
+  "devDependencies": {
+    "http-server": "^14.1.0",
+    "parcel": "^2.3.2",
+    "typescript": "^4.6.2"
+  }
+}
