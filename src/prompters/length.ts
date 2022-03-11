@@ -1,3 +1,5 @@
+import { REGEX_NUMBER } from "../utils";
+
 const UNIT_GROUP_DICT = {
   inches: ["inch", "inches", "in", '"'],
   miles: ["miles", "mile"],
@@ -20,13 +22,13 @@ const UNIT_VALUE_DICT = {
 
 const REGEX_LENGTH_SPECIAL = new RegExp(
   "" +
-    /([\d\,]+)/.source +
+    REGEX_NUMBER.source +
     /\s*/.source +
     `(?:${UNIT_GROUP_DICT["feet"].join("|")})` +
     /\s*/.source +
     /(?:and|&)*/.source +
     /\s*/.source +
-    /([\d\.\,]+)/.source +
+    REGEX_NUMBER.source +
     /\s*/.source +
     `(?:${UNIT_GROUP_DICT["inches"].join("|")})` +
     /(?=[^a-z"']|$|\n)/.source,
@@ -35,7 +37,7 @@ const REGEX_LENGTH_SPECIAL = new RegExp(
 
 const REGEX_LENGTH = new RegExp(
   "" +
-    /([\d\.\,]+)/.source +
+    REGEX_NUMBER.source +
     /\s*/.source +
     `(${Object.values(UNIT_GROUP_DICT).flat().join("|")})` +
     /(?=[^a-z"']|$|\n)/.source,
